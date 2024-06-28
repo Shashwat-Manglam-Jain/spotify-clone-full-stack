@@ -345,7 +345,7 @@ const Allsong = () => {
               <IoShuffleOutline
                 className="plic"
                 style={{
-                  background: "black",
+                  background: "gray",
                   fontSize: "20px",
                   color: "white",
                 }}
@@ -353,7 +353,7 @@ const Allsong = () => {
               <FaBackwardStep
                 className="plic"
                 style={{
-                  background: "black",
+                  background: "gray",
                   fontSize: "20px",
                   color: "white",
                 }}
@@ -384,7 +384,7 @@ const Allsong = () => {
               <FaForwardStep
                 className="plic"
                 style={{
-                  background: "black",
+                  background: "gray",
                   fontSize: "20px",
                   color: "white",
                 }}
@@ -393,7 +393,7 @@ const Allsong = () => {
               <CiRepeat
                 className="plic"
                 style={{
-                  background: "black",
+                  background: "gray",
                   fontSize: "20px",
                   color: "white",
                 }}
@@ -561,7 +561,7 @@ const Container = styled.div`
     flex-direction: row;
     padding: 10px;
     padding-left: 30px;
-    background: black;
+    background: linear-gradient(to top, #000000, #000001, #000111);
     cursor: pointer;
     gap: 20px;
     left: -10px;
