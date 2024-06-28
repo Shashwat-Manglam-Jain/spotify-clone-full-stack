@@ -23,6 +23,9 @@ const Home = () => {
   const redirectUri = "http://localhost:5173/home";
   const codeVerifier = localStorage.getItem("code_verifier");
 
+  
+
+
   useEffect(() => {
     async function getToken(code) {
       const url = "https://accounts.spotify.com/api/token";
@@ -246,23 +249,33 @@ const Home = () => {
 
   return (
     <Container>
-      <div className="divide">
-        <div className="scrollable">
-          <div style={{ height: "auto", background: " #1e1e1e" }}>
-            <div className="home">
-              <GoHomeFill className="ho1" />
-              <span>Home</span>
-            </div>
-            <div className="home">
-              <IoSearchOutline
-                className="ho1 inh"
-                style={{ color: "#D0D0D0" }}
-              />
-              <span className="inh">Search</span>
-            </div>
+    <div className="navbar">
+      <Link to="/" className="nav-item">
+        <GoHomeFill />
+        <span>Home</span>
+      </Link>
+      <Link to="/search" className="nav-item">
+        <IoSearchOutline />
+        <span>Search</span>
+      </Link>
+      <Link to="/library" className="nav-item">
+        <BiLibrary />
+        <span>Library</span>
+      </Link>
+    </div>
+    <div className="divide">
+      <div className="scrollable">
+        <div className="sidebar-section">
+          <div className="home">
+            <GoHomeFill className="ho1" />
+            <span>Home</span>
           </div>
-          <br />
-          <br />
+          <Link to='/search' style={{textDecoration:'none'}}><div className="home">
+            <IoSearchOutline className="ho1 inh" />
+            <span className="inh">Search</span>
+          </div></Link>
+        </div>
+        <br />
           <div className="lib">
             <BiLibrary style={{ fontSize: "32px" }} />
             <h3 style={{ fontSize: "19px" }}>Your Liabrary </h3>
@@ -275,7 +288,7 @@ const Home = () => {
 
           <div style={{ background: "#1e1e1e" }}>
             {lib.length > 0 ? (
-              lib.map((item, index) => (
+              lib?.map((item, index) => (
                 <Link
                   to={`/playlist/${item.id}`}
                   key={lib.id}
@@ -484,291 +497,295 @@ const Home = () => {
             )}
           </div>
 
-          <div className="try-something-else">
-            Throwback
-            <span>
-              <Link
-                 to="/allshow"
-                style={{
-                  fontWeight: "500",
-                  color: "gray",
-                  textDecoration: "none",
-                  marginRight:'10px', whiteSpace: 'nowrap'
-                }}
-                 
-                 
-                state={{ data: playlists }}
-              >
-                Show all
-              </Link>
-            </span>
-          </div>
-
-          <div className="playl">
-            {playlists.length > 0 ? (
-              playlists.map((playlist) => (
-                <Link
-                  to={`/playlist/${playlist.id}`}
-                  key={playlist.id}
-                  style={{ textDecoration: "none" }}
-                >
-                  <div className="play">
-                    <img
-                      src={playlist.images[0]?.url}
-                      alt="Playlist cover"
-                      className="pimg"
-                    />
-                    <IoMdPlay className="plic" style={{ color: "black" }} />
-                    <h3 className="pname">{playlist.name.slice(0, 50)}...</h3>
-                    <p className="pname" style={{ color: "gray" }}>
-                      {playlist.description.slice(0, 150)}...
-                    </p>
-                  </div>
-
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-                </Link>
-              ))
-            ) : (
-              <p
-                className="try-something-else"
-                style={{ fontWeight: "500", color: "gray", fontSize: "20px" }}
-              >
-                Loading...
-              </p>
-            )}
-          </div>
 
           <div className="try-something-else">
-            Spotify  Podcasts
-            <span>
-              <Link
-                 to="/allshow"
-                style={{
-                  fontWeight: "500",
-                  color: "gray",
-                  textDecoration: "none",
-                  marginRight:'10px', whiteSpace: 'nowrap'
-                }}
-                 
-                 
-                state={{ data: podcast }}
-              >
-                Show all
-              </Link>
-            </span>
-          </div>
+Throwback
+<span>
+  <Link
+     to="/allshow"
+    style={{
+      fontWeight: "500",
+      color: "gray",
+      textDecoration: "none",
+      marginRight:'10px', whiteSpace: 'nowrap'
+    }}
+     
+     
+    state={{ data: playlists }}
+  >
+    Show all
+  </Link>
+</span>
+</div>
 
-          <div className="playl">
-            {podcast.length > 0 ? (
-              podcast.map((playlist) => (
-                <Link
-                  to={`/playlist/${playlist.id}`}
-                  key={playlist.id}
-                  style={{ textDecoration: "none" }}
-                >
-                  <div className="play">
-                    <img
-                      src={playlist.images[0]?.url}
-                      alt="Playlist cover"
-                      className="pimg"
-                    />
-                    <IoMdPlay className="plic" style={{ color: "black" }} />
-                    <h3 className="pname">{playlist.name.slice(0, 50)}...</h3>
-                    <p className="pname" style={{ color: "gray" }}>
-                      {playlist.description.slice(0, 150)}...
-                    </p>
-                  </div>
+<div className="playl">
+{playlists.length > 0 ? (
+  playlists.map((playlist) => (
+    <Link
+      to={`/playlist/${playlist.id}`}
+      key={playlist.id}
+      style={{ textDecoration: "none" }}
+    >
+      <div className="play">
+        <img
+          src={playlist.images[0]?.url}
+          alt="Playlist cover"
+          className="pimg"
+        />
+        <IoMdPlay className="plic" style={{ color: "black" }} />
+        <h3 className="pname">{playlist.name.slice(0, 50)}...</h3>
+        <p className="pname" style={{ color: "gray" }}>
+          {playlist.description.slice(0, 150)}...
+        </p>
+      </div>
 
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-                </Link>
-              ))
-            ) : (
-              <p
-                className="try-something-else"
-                style={{ fontWeight: "500", color: "gray", fontSize: "20px" }}
-              >
-                Loading...
-              </p>
-            )}
-          </div>
+      <br />
+      <br />
+      <br />
+      <br />
+    </Link>
+  ))
+) : (
+  <p
+    className="try-something-else"
+    style={{ fontWeight: "500", color: "gray", fontSize: "20px" }}
+  >
+    Loading...
+  </p>
+)}
+</div>
 
-          <div className="try-something-else">
-            More like Jasleen 
-            <span>
-              <Link
-                 to="/allshow"
-                style={{
-                  fontWeight: "500",
-                  color: "gray",
-                  textDecoration: "none",
-                  marginRight:'10px', whiteSpace: 'nowrap'
-                }}
-                 
-                 
-                state={{ data: liked }}
-              >
-                Show all
-              </Link>
-            </span>
-          </div>
+<div className="try-something-else">
+Spotify  Podcasts
+<span>
+  <Link
+     to="/allshow"
+    style={{
+      fontWeight: "500",
+      color: "gray",
+      textDecoration: "none",
+      marginRight:'10px', whiteSpace: 'nowrap'
+    }}
+     
+     
+    state={{ data: podcast }}
+  >
+    Show all
+  </Link>
+</span>
+</div>
 
-          <div className="playl">
-            {liked.length > 0 ? (
-              liked.map((playlist) => (
-                <Link
-                  to={`/playlist/${playlist.id}`}
-                  key={playlist.id}
-                  style={{ textDecoration: "none" }}
-                >
-                  <div className="play">
-                    <img
-                      src={playlist.images[0]?.url}
-                      alt="Playlist cover"
-                      className="pimg"
-                    />
-                    <IoMdPlay className="plic" style={{ color: "black" }} />
-                    <h3 className="pname">{playlist.name.slice(0, 50)}...</h3>
-                    <p className="pname" style={{ color: "gray" }}>
-                      {playlist.description.slice(0, 150)}...
-                    </p>
-                  </div>
+<div className="playl">
+{podcast.length > 0 ? (
+  podcast.map((playlist) => (
+    <Link
+      to={`/playlist/${playlist.id}`}
+      key={playlist.id}
+      style={{ textDecoration: "none" }}
+    >
+      <div className="play">
+        <img
+          src={playlist.images[0]?.url}
+          alt="Playlist cover"
+          className="pimg"
+        />
+        <IoMdPlay className="plic" style={{ color: "black" }} />
+        <h3 className="pname">{playlist.name.slice(0, 50)}...</h3>
+        <p className="pname" style={{ color: "gray" }}>
+          {playlist.description.slice(0, 150)}...
+        </p>
+      </div>
 
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-                </Link>
-              ))
-            ) : (
-              <p
-                className="try-something-else"
-                style={{ fontWeight: "500", color: "gray", fontSize: "20px" }}
-              >
-                Loading...
-              </p>
-            )}
-          </div>
+      <br />
+      <br />
+      <br />
+      <br />
+    </Link>
+  ))
+) : (
+  <p
+    className="try-something-else"
+    style={{ fontWeight: "500", color: "gray", fontSize: "20px" }}
+  >
+    Loading...
+  </p>
+)}
+</div>
 
-          <div className="try-something-else">
-            Featured Charts
-            <span>
-              <Link
-                 to="/allshow"
-                style={{
-                  fontWeight: "500",
-                  color: "gray",
-                  textDecoration: "none",
-                  marginRight:'10px', whiteSpace: 'nowrap'
-                }}
-                 
-                 
-                state={{ data: Chart }}
-              >
-                Show all
-              </Link>
-            </span>
-          </div>
+<div className="try-something-else">
+More like Jasleen 
+<span>
+  <Link
+     to="/allshow"
+    style={{
+      fontWeight: "500",
+      color: "gray",
+      textDecoration: "none",
+      marginRight:'10px', whiteSpace: 'nowrap'
+    }}
+     
+     
+    state={{ data: liked }}
+  >
+    Show all
+  </Link>
+</span>
+</div>
 
-          <div className="playl">
-            {Chart.length > 0 ? (
-              Chart.map((playlist) => (
-                <Link
-                  to={`/playlist/${playlist.id}`}
-                  key={playlist.id}
-                  style={{ textDecoration: "none" }}
-                >
-                  <div className="play">
-                    <img
-                      src={playlist.images[0]?.url}
-                      alt="Playlist cover"
-                      className="pimg"
-                    />
-                    <IoMdPlay className="plic" style={{ color: "black" }} />
-                    <h3 className="pname">{playlist.name.slice(0, 50)}...</h3>
-                    <p className="pname" style={{ color: "gray" }}>
-                      {playlist.description.slice(0, 150)}...
-                    </p>
-                  </div>
+<div className="playl">
+{liked.length > 0 ? (
+  liked.map((playlist) => (
+    <Link
+      to={`/playlist/${playlist.id}`}
+      key={playlist.id}
+      style={{ textDecoration: "none" }}
+    >
+      <div className="play">
+        <img
+          src={playlist.images[0]?.url}
+          alt="Playlist cover"
+          className="pimg"
+        />
+        <IoMdPlay className="plic" style={{ color: "black" }} />
+        <h3 className="pname">{playlist.name.slice(0, 50)}...</h3>
+        <p className="pname" style={{ color: "gray" }}>
+          {playlist.description.slice(0, 150)}...
+        </p>
+      </div>
 
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-                </Link>
-              ))
-            ) : (
-              <p
-                className="try-something-else"
-                style={{ fontWeight: "500", color: "gray", fontSize: "20px" }}
-              >
-                Loading...
-              </p>
-            )}
-          </div>
+      <br />
+      <br />
+      <br />
+      <br />
+    </Link>
+  ))
+) : (
+  <p
+    className="try-something-else"
+    style={{ fontWeight: "500", color: "gray", fontSize: "20px" }}
+  >
+    Loading...
+  </p>
+)}
+</div>
 
-          <div className="try-something-else">
-            Instrumental
-            <span>
-              <Link
-                 to="/allshow"
-                style={{
-                  fontWeight: "500",
-                  color: "gray",
-                  textDecoration: "none",
-                  marginRight:'10px', whiteSpace: 'nowrap'
-                }}
-                 
-                 
-                state={{ data: Instrumental }}
-                
-              >
-                Show all
-              </Link>
-            </span>
-          </div>
+<div className="try-something-else">
+Featured Charts
+<span>
+  <Link
+     to="/allshow"
+    style={{
+      fontWeight: "500",
+      color: "gray",
+      textDecoration: "none",
+      marginRight:'10px', whiteSpace: 'nowrap'
+    }}
+     
+     
+    state={{ data: Chart }}
+  >
+    Show all
+  </Link>
+</span>
+</div>
 
-          <div className="playl">
-            {Instrumental.length > 0 ? (
-              Instrumental.map((playlist) => (
-                <Link
-                  to={`/playlist/${playlist.id}`}
-                  key={playlist.id}
-                  style={{ textDecoration: "none" }}
-                >
-                  <div className="play">
-                    <img
-                      src={playlist.images[0]?.url}
-                      alt="Playlist cover"
-                      className="pimg"
-                    />
-                    <IoMdPlay className="plic" style={{ color: "black" }} />
-                    <h3 className="pname">{playlist.name.slice(0, 50)}...</h3>
-                    <p className="pname" style={{ color: "gray" }}>
-                      {playlist.description.slice(0, 150)}...
-                    </p>
-                  </div>
+<div className="playl">
+{Chart.length > 0 ? (
+  Chart.map((playlist) => (
+    <Link
+      to={`/playlist/${playlist.id}`}
+      key={playlist.id}
+      style={{ textDecoration: "none" }}
+    >
+      <div className="play">
+        <img
+          src={playlist.images[0]?.url}
+          alt="Playlist cover"
+          className="pimg"
+        />
+        <IoMdPlay className="plic" style={{ color: "black" }} />
+        <h3 className="pname">{playlist.name.slice(0, 50)}...</h3>
+        <p className="pname" style={{ color: "gray" }}>
+          {playlist.description.slice(0, 150)}...
+        </p>
+      </div>
 
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-                </Link>
-              ))
-            ) : (
-              <p
-                className="try-something-else"
-                style={{ fontWeight: "500", color: "gray", fontSize: "20px" }}
-              >
-                Loading...
-              </p>
-            )}
-          </div>
+      <br />
+      <br />
+      <br />
+      <br />
+    </Link>
+  ))
+) : (
+  <p
+    className="try-something-else"
+    style={{ fontWeight: "500", color: "gray", fontSize: "20px" }}
+  >
+    Loading...
+  </p>
+)}
+</div>
+
+<div className="try-something-else">
+Instrumental
+<span>
+  <Link
+     to="/allshow"
+    style={{
+      fontWeight: "500",
+      color: "gray",
+      textDecoration: "none",
+      marginRight:'10px', whiteSpace: 'nowrap'
+    }}
+     
+     
+    state={{ data: Instrumental }}
+    
+  >
+    Show all
+  </Link>
+</span>
+</div>
+
+<div className="playl">
+{Instrumental.length > 0 ? (
+  Instrumental.map((playlist) => (
+    <Link
+      to={`/playlist/${playlist.id}`}
+      key={playlist.id}
+      style={{ textDecoration: "none" }}
+    >
+      <div className="play">
+        <img
+          src={playlist.images[0]?.url}
+          alt="Playlist cover"
+          className="pimg"
+        />
+        <IoMdPlay className="plic" style={{ color: "black" }} />
+        <h3 className="pname">{playlist.name.slice(0, 50)}...</h3>
+        <p className="pname" style={{ color: "gray" }}>
+          {playlist.description.slice(0, 150)}...
+        </p>
+      </div>
+
+      <br />
+      <br />
+      <br />
+      <br />
+    </Link>
+  ))
+) : (
+  <p
+    className="try-something-else"
+    style={{ fontWeight: "500", color: "gray", fontSize: "20px" }}
+  >
+    Loading...
+  </p>
+)}
+</div>
+
+
+ 
         </div>
       </div>
     </Container>
@@ -778,7 +795,7 @@ const Home = () => {
 export default Home;
 
 const Container = styled.div`
-  .limg {
+ .limg {
     width: 50px;
     height: 50px;
     border-radius: 5px;
@@ -789,7 +806,7 @@ const Container = styled.div`
     flex-direction: row;
     padding: 10px;
     gap: 10px;
-    cursor:pointer
+    cursor: pointer;
   }
 
   .dflex:hover {
@@ -799,15 +816,92 @@ const Container = styled.div`
   .divide {
     display: flex;
     flex-direction: row;
-   
-   
-   
   }
 
   .lib {
-    &:hover {
-      color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background: #1e1e1e;
+    font-size: 19px;
+    color: gray;
+    cursor: pointer;
+  }
+ .navbar {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #000001;
+    justify-content: space-around;
+    padding: 10px 0;
+    z-index: 1000;
+  }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+
+    svg {
+      font-size: 24px;
     }
+  }
+
+  @media (max-width: 938px) {
+    .scrollable {
+      display: none;
+    }
+
+    .navbar {
+      display: flex;
+    }
+
+    .width2 {
+      width: 100%;
+    }
+
+    .home_body {
+      width: 100%;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .footer {   
+
+      width: 100%;
+      justify-content: space-around;
+    }
+
+    .section-header {
+      width: 100%;
+      font-size: 20px;
+    }
+
+    .playlist-container {
+      width: 100%;
+      flex-wrap: nowrap;
+      padding: 10px 0;
+      gap: 10px;
+    }
+}
+  .lib-icon {
+    font-size: 32px;
+  }
+
+  .lib-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .lib:hover {
+    color: white;
   }
 
   .scrollable {position:sticky;
@@ -1031,7 +1125,7 @@ position:relative;
     background: #18d860;
     border-radius: 50%;
     padding: 15px;
-    position: absolute;
+    position: relative;
     padding-left: -18px;
     font-size: 30px;
     margin-left: -70px;
@@ -1047,7 +1141,7 @@ position:relative;
 
 
 
- @media (max-width: 768px) {
+ @media (max-width: 938px) {
  
   .scrollable {display:none;
  
@@ -1067,13 +1161,16 @@ position:relative;
 
 .home_body{
 width:93vw;
-justify-content:space-between
+justify-content:space-between;
+
 }
 
 
 
 .footer{
-width:93vw
+width:93vw;
+ gap: 1;
+justify-content: normal;
 }
 .try-something-else{
 width:93vw;
@@ -1081,7 +1178,7 @@ width:93vw;
     white-space: nowrap;
 }
 .playl {width:93vw;
-gap:77px;
+gap:13px;
 padding:27px
  overflow: scroll;
 

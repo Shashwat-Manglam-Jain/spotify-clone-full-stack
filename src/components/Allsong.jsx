@@ -20,7 +20,7 @@ const Allsong = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [bgGradient, setBgGradient] = useState(
-    "linear-gradient(to top, #000000, #ff007a, #ff007a)"
+    "linear-gradient(to top, #000000, #000001, #000111)"
   );
   const isDarkColor = (color) => {
     const rgb = color.match(/\d+/g);

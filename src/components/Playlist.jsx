@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import { IoMdPlay } from "react-icons/io";
+
 const Playlist = () => {
   const { state } = useLocation();
   const data = state?.data || [];
